@@ -5,7 +5,9 @@ import CableLengthHelper from "./pages/CableLengthHelper.jsx";
 import FuelCost from "./pages/FuelCost.jsx";
 import Calories from "./pages/Calories.jsx";
 import Diagonal from "./pages/Diagonal.jsx";
-
+import WifiCoverage from "./pages/WifiCoverage.jsx";
+import Analogies from "./pages/Analogies.jsx";
+import PaceTarget from "./pages/PaceTarget.jsx";
 
 export default function App() {
   const path = useHashRoute("#/time");
@@ -17,6 +19,9 @@ export default function App() {
     { href: "#/fuel", label: "Fuel/Energy Cost" },
     { href: "#/calories", label: "Calories" },
     { href: "#/diagonal", label: "Diagonal (LOS)" },
+    { href: "#/wifi", label: "Wi-Fi Coverage" },
+    { href: "#/analogies", label: "Analogies" },
+    { href: "#/pace", label: "Pace Target" },
   ];
 
   return (
@@ -45,6 +50,9 @@ export default function App() {
         {path === "#/fuel" && <FuelCost />}
         {path === "#/calories" && <Calories />}
         {path === "#/diagonal" && <Diagonal />}
+        {path === "#/wifi" && <WifiCoverage />}
+        {path === "#/analogies" && <Analogies />}
+        {path === "#/pace" && <PaceTarget />}
       </div>
     </div>
   );
