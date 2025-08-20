@@ -1,4 +1,6 @@
 import * as React from "react";
+import DistanceEstimator from "./DistanceEstimator.jsx";
+
 // minimal router-ish toggle at top of App.jsx render
 const [page, setPage] = React.useState("calc"); // "calc" | "estimate"
 ...
