@@ -1,4 +1,12 @@
 import * as React from "react";
+// minimal router-ish toggle at top of App.jsx render
+const [page, setPage] = React.useState("calc"); // "calc" | "estimate"
+...
+<div className="flex gap-2 mb-4">
+  <button onClick={()=>setPage("calc")} className="px-3 py-1.5 rounded-xl border">Time Calculator</button>
+  <button onClick={()=>setPage("estimate")} className="px-3 py-1.5 rounded-xl border">Distance Estimator</button>
+</div>
+{page === "calc" ? <DistanceTimeCalculator/> : <DistanceEstimator/>}
 
 export default function DistanceTimeCalculator() {
   // --- Constants ---
