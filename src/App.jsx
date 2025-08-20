@@ -1,42 +1,50 @@
 import * as React from "react";
-import DistanceEstimator from "./DistanceEstimator.jsx"; // <- the new page
+import { useHashRoute } from "./router.js";
+import DistanceEstimator from "./DistanceEstimator.jsx";
+import CableLengthHelper from "./pages/CableLengthHelper.jsx";
+import FuelCost from "./pages/FuelCost.jsx";
+import Calories from "./pages/Calories.jsx";
+import Diagonal from "./pages/Diagonal.jsx";
 
-// Top-level app with a simple toggle between the two pages
+
 export default function App() {
-  const [page, setPage] = React.useState("calc"); // "calc" | "estimate"
+  const path = useHashRoute("#/time");
+
+  const tabs = [
+    { href: "#/time", label: "Time Calculator" },
+    { href: "#/estimate", label: "Distance Estimator" },
+    { href: "#/cable", label: "Cable Length" },
+    { href: "#/fuel", label: "Fuel/Energy Cost" },
+    { href: "#/calories", label: "Calories" },
+    { href: "#/diagonal", label: "Diagonal (LOS)" },
+  ];
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <div className="max-w-5xl mx-auto px-4 py-6">
-        <header className="mb-4">
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
-            Distance Tools
-          </h1>
-          <p className="text-sm text-slate-600 mt-1">
-            Switch between the time calculator and the distance estimator.
-          </p>
+        <header className="mb-5">
+          <h1 className="text-2xl sm:text-3xl font-bold">Distance Toolbox</h1>
+          <p className="text-sm text-slate-600">Pick the tool you need.</p>
         </header>
 
-        <nav className="flex gap-2 mb-6">
-          <button
-            onClick={() => setPage("calc")}
-            className={`px-3 py-1.5 rounded-xl border ${
-              page === "calc" ? "bg-slate-900 text-white" : "bg-white"
-            }`}
-          >
-            Time Calculator
-          </button>
-          <button
-            onClick={() => setPage("estimate")}
-            className={`px-3 py-1.5 rounded-xl border ${
-              page === "estimate" ? "bg-slate-900 text-white" : "bg-white"
-            }`}
-          >
-            Distance Estimator
-          </button>
+        <nav className="flex flex-wrap gap-2 mb-6">
+          {tabs.map(t => {
+            const active = path === t.href;
+            return (
+              <a key={t.href} href={t.href}
+                 className={`px-3 py-1.5 rounded-xl border ${active ? "bg-slate-900 text-white" : "bg-white"}`}>
+                {t.label}
+              </a>
+            );
+          })}
         </nav>
 
-        {page === "calc" ? <DistanceTimeCalculator /> : <DistanceEstimator />}
+        {path === "#/time" && <DistanceTimeCalculator />}
+        {path === "#/estimate" && <DistanceEstimator />}
+        {path === "#/cable" && <CableLengthHelper />}
+        {path === "#/fuel" && <FuelCost />}
+        {path === "#/calories" && <Calories />}
+        {path === "#/diagonal" && <Diagonal />}
       </div>
     </div>
   );
